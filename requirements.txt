@@ -1,0 +1,5 @@
+flask
+pure-python-adb
+opencv-python
+numpy
+requests

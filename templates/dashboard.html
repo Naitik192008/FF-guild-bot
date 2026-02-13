@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Fire Guild Automation</title>
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        button {
+            padding: 10px 15px;
+            margin: 5px;
+            cursor: pointer;
+        }
+
+        .status-idle {
+            color: green;
+        }
+
+        .status-busy {
+            color: orange;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Free Fire Guild Automation Dashboard</h1>
+
+    <div>
+        <button onclick="sendCommand('/api/join_guild')">Join Guild (All Bots)</button>
+        <button onclick="sendCommand('/api/start_farming')">Start Farming (All Bots)</button>
+        <button
+            onclick="if(confirm('WARNING: This will WIPE guest data on all connected devices. Continue?')) sendCommand('/api/create_bots')">Create/Reset
+            Bots</button>
+        <button onclick="location.reload()">Refresh Status</button>
+    </div>
+
+    <h2>Active Bots</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Serial</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for bot in bots %}
+            <tr>
+                <td>{{ bot.serial }}</td>
+                <td class="{{ 'status-idle' if bot.status == 'IDLE' else 'status-busy' }}">{{ bot.status }}</td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="2">No bots connected.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <script>
+        function sendCommand(url) {
+            fetch(url, { method: 'POST' })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message);
+                    location.reload();
+                })
+                .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+
+</html>
