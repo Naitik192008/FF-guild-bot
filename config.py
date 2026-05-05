@@ -1,8 +1,8 @@
 # config.py
 
 # Guild Settings
-TARGET_GUILD_ID = "3046346194"  # REPLACE THIS with your Guild ID
-TARGET_GUILD_NAME = "UCHIHA SEPT"
+TARGET_GUILD_ID = "3051009449"  # REPLACE THIS with your Guild ID
+TARGET_GUILD_NAME = "Crimson Aura"
 
 # Game Settings
 PACKAGE_NAME = "com.dts.freefiremax"
